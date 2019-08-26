@@ -23,7 +23,7 @@ Server::Server(int num_xpoints, int dbs_size, int pub_mod_bitsize, int maxSetsiz
 	db = new Client_Dataset[dbs_size];
 	table_size = tb_size;
 	w_A_ = (mpz_t**)malloc(table_size * sizeof(mpz_t));
-  w_B_ = (mpz_t**)malloc(table_size * sizeof(mpz_t));
+	w_B_ = (mpz_t**)malloc(table_size * sizeof(mpz_t));
 	temp_w_A = (mpz_t**)malloc(table_size * sizeof(mpz_t));
 	temp_w_B = (mpz_t**)malloc(table_size * sizeof(mpz_t));
 	sum_a = (mpz_t**)malloc(table_size * sizeof(mpz_t));
