@@ -30,23 +30,25 @@ bigint* gen_randSet (int size, int max_bitsize, bigint* pubModuli, bigint* x_poi
 		mpz_urandomb(temp, rand, max_bitsize);
 		mpz_mod(temp, temp, pubModuli[0]);
 		/*
-	for(int k=0;k<counter; k++){
-		if(mpz_cmp(pr_val[k],temp)==0)
-		duplicated=true;}
-	*/
-	while (mpz_cmp(temp, pubModuli[0]) > 0 || duplicated == true){ // ensures the elements are smaller than the public moduli.
-		mpz_init(temp);
-		mpz_urandomb(temp, rand, max_bitsize);
-		//extra checks-- ensures they are distinc.
-		/*
 		for(int k=0;k<counter; k++){
-			if(mpz_cmp(pr_val[k],temp)==0){
-				duplicated=true;break;
+			if(mpz_cmp(pr_val[k],temp)==0)
+			duplicated=true;
 			}
-			else{duplicated=false;}
-		}
-		*/
-		for(int j = 0; j < xpoint_size; j++){ //checks the random element is not equal to any x_points.
+			*/
+		while (mpz_cmp(temp, pubModuli[0]) > 0 || duplicated == true){ // ensures the elements are smaller than the public moduli.
+			mpz_init(temp);
+			mpz_urandomb(temp, rand, max_bitsize);
+			//extra checks-- ensures they are distinc.
+			/*
+			for(int k=0;k<counter; k++){
+			if(mpz_cmp(pr_val[k],temp)==0){
+			duplicated=true;break;
+			}
+			else{duplicated=false;
+			}
+			}
+			*/
+			for(int j = 0; j < xpoint_size; j++){ //checks the random element is not equal to any x_points.
 				if(mpz_cmp(temp, x_points[j]) == 0){
 					mpz_init(temp);
 					mpz_urandomb(temp, rand, max_bitsize);
@@ -245,6 +247,4 @@ int main(){
 return 0;
 
 }
-//g++ -g -O2   Rand.o Hashtable.o Polynomial.o Server.o Client.o OPSImain.cpp - -c Client.cpp  -I/afs/inf.ed.ac.uk/user/a/akheirba/bloom_filter/bloom_filter.hpp  -lntl -lgmpxx -lgmp -lcryptopp  -std=gnu++11
-//g++ -g -O0 -I$home/aydinabadi/include Rand.o  Hashtable.o HTtoBF.cpp  -o l -I/aydinabadi/bloom_filter/bloom_filter.hpp  -lntl -lgmpxx -lgmp -lcryptopp
-//$ g++ -I$home/win7/include  polynomial.o server.o client.o OPSImain.cpp -lgomp  -L/cygdrive/c/cygwin/home/Win7/libpaillier -l:libpaillier.a  -L$home/win7/lib -lntl -lgmpxx -lgmp -lm
+//**********************************************************************
