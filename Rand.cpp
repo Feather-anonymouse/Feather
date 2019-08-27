@@ -188,7 +188,7 @@ bigint** Random::gen_PRNs_forBins(int table_size, byte* key, byte* iv, int key_s
 
 	// regenertes the corresponding blinding factor.
 	bigint ** res_;
-  res_ = (mpz_t**)malloc(table_size * sizeof(mpz_t));
+	res_ = (mpz_t**)malloc(table_size * sizeof(mpz_t));
 	//-------- derive a BF_key for indx
 	string cipher;
 	unsigned char *prn_;
@@ -199,27 +199,27 @@ bigint** Random::gen_PRNs_forBins(int table_size, byte* key, byte* iv, int key_s
 	// encrypt indx to derive a key
 	for(int i = 0;i < table_size; i++){
 		e.SetKeyWithIV(key, key_size, iv);
-    cipher.clear();
-    res_[i] = (mpz_t*)malloc(bin_cap * sizeof(mpz_t));
+		cipher.clear();
+		res_[i] = (mpz_t*)malloc(bin_cap * sizeof(mpz_t));
 		StringSource s(to_string(i), true, new StreamTransformationFilter(e, new StringSink(cipher)));
 		unsigned char der_key_0[key_size]; // convert the ciphertext into a der_key
 		memset(der_key_0, 0x00, key_size + 1);
 		strcpy((char*)der_key_0, cipher.c_str());
 		e.SetKeyWithIV(der_key_0, key_size, iv);	// set key an iv.
-    for (int j = 0; j < bin_cap; j++){
-      cipher.clear();
-      temp.clear();
-      StringSource sss(to_string(j), true,new StreamTransformationFilter(e,new StringSink(cipher)));
-		  temp = cipher.substr (0,byte_);// truncate the ciphertext
+		for (int j = 0; j < bin_cap; j++){
+			cipher.clear();
+			temp.clear();
+			StringSource sss(to_string(j), true, new StreamTransformationFilter(e, new StringSink(cipher)));
+			temp = cipher.substr (0, byte_);// truncate the ciphertext
 			memset(prn_, 0x00, byte_ + 1);
-		  strcpy((char*)prn_, temp.c_str());
-		  mpz_init(res_[i][j]);
-		  mpz_import(res_[i][j], byte_, 1, sizeof(prn_[0]), 0, 0, prn_);
-    }
-  }
+			strcpy((char*)prn_, temp.c_str());
+			mpz_init(res_[i][j]);
+			mpz_import(res_[i][j], byte_, 1, sizeof(prn_[0]), 0, 0, prn_);
+		}
+	}
 	delete []prn_;
 	cipher.clear();
 	temp.clear();
-  return res_;
+	return res_;
 }
 //**********************************************************************
