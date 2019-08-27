@@ -242,62 +242,62 @@ bigint* Polynomial::evaluate_coeffs(bigint* coeff, bigint* x_points, int coeff_s
 // a polynomial and returns an array containing the polynomial's coefficients.
 
 bigint* Polynomial::interpolate(int size, bigint* a, bigint* b, bigint N){
-
-   long m = size;
-   bigint* prod;
-	 prod = (mpz_t*)malloc(size * sizeof(mpz_t));
-	 for(int i = 0; i < size; i++){
-		 mpz_init_set(prod[i], a[i]);
-	 }
-	 bigint t1, t2;
-   mpz_init(t1);
-   mpz_init(t2);
-   int k, i;
-   bigint* res;
-   res = (mpz_t*)malloc(size * sizeof(mpz_t));
-	 bigint aa;
-   for (k = 0; k < m; k++) {
-		 mpz_init_set(aa , a[k]);
-		 mpz_init_set_str(t1, "1", 10);
-		 for (i = k-1; i >= 0; i--) {
-			 mpz_mul(t1, t1, aa);
-			 mpz_mod(t1, t1, N);
-			 mpz_add(t1, t1, prod[i]);
-		 }
-		 mpz_init_set_str(t2, "0", 10);
-		 for (i = k - 1; i >= 0; i--) {
-			 mpz_mul(t2, t2, aa);
-			 mpz_mod(t2, t2,N);
-			 mpz_add(t2, t2, res[i]);
-		 }
-		 mpz_invert(t1, t1, N);
-		 mpz_sub(t2, b[k], t2);
-		 mpz_mul(t1, t1, t2);
-		 for (i = 0; i < k; i++) {
-			 mpz_mul(t2, prod[i], t1);
-			 mpz_mod(t2, t2,N);
-			 mpz_add(res[i], res[i], t2);
-			 mpz_mod(res[i], res[i], N);
-		 }
-		 mpz_init_set(res[k], t1);
-		 mpz_mod(res[k], res[k], N);
-		 if (k < m - 1) {
-			 if (k == 0)
-			 mpz_neg(prod[0], prod[0]);
-			 else {
-				 mpz_neg(t1, a[k]);
-				 mpz_add(prod[k], t1, prod[k - 1]);
-				 for (i = k - 1; i >= 1; i--) {
-					 mpz_mul(t2, prod[i], t1);
-					 mpz_mod(t2, t2,N);
-					 mpz_add(prod[i], t2, prod[i-1]);
-				 }
-				 mpz_mul(prod[0], prod[0], t1);
-				 mpz_mod(prod[0], prod[0],N);
-			 }
-		 }
-	 }
-	 while (m > 0 && (res[m - 1] == 0)) m--;
-	 return res;
+	
+	long m = size;
+	bigint* prod;
+	prod = (mpz_t*)malloc(size * sizeof(mpz_t));
+	for(int i = 0; i < size; i++){
+		mpz_init_set(prod[i], a[i]);
+	}
+	bigint t1, t2;
+	mpz_init(t1);
+   	mpz_init(t2);
+   	int k, i;
+   	bigint* res;
+   	res = (mpz_t*)malloc(size * sizeof(mpz_t));
+	bigint aa;
+	for (k = 0; k < m; k++) {
+		mpz_init_set(aa , a[k]);
+		mpz_init_set_str(t1, "1", 10);
+		for (i = k - 1; i >= 0; i--) {
+			mpz_mul(t1, t1, aa);
+			mpz_mod(t1, t1, N);
+			mpz_add(t1, t1, prod[i]);
+		}
+		mpz_init_set_str(t2, "0", 10);
+		for (i = k - 1; i >= 0; i--) {
+			mpz_mul(t2, t2, aa);
+			mpz_mod(t2, t2,N);
+			mpz_add(t2, t2, res[i]);
+		}
+		mpz_invert(t1, t1, N);
+		mpz_sub(t2, b[k], t2);
+		mpz_mul(t1, t1, t2);
+		for (i = 0; i < k; i++) {
+			mpz_mul(t2, prod[i], t1);
+			mpz_mod(t2, t2,N);
+			mpz_add(res[i], res[i], t2);
+			mpz_mod(res[i], res[i], N);
+		}
+		mpz_init_set(res[k], t1);
+		mpz_mod(res[k], res[k], N);
+		if (k < m - 1) {
+			if (k == 0)
+			mpz_neg(prod[0], prod[0]);
+			else {
+				mpz_neg(t1, a[k]);
+				mpz_add(prod[k], t1, prod[k - 1]);
+				for (i = k - 1; i >= 1; i--) {
+					mpz_mul(t2, prod[i], t1);
+					mpz_mod(t2, t2,N);
+					mpz_add(prod[i], t2, prod[i-1]);
+				}
+				mpz_mul(prod[0], prod[0], t1);
+				mpz_mod(prod[0], prod[0],N);
+			}
+		}
+	}
+	while (m > 0 && (res[m - 1] == 0)) m--;
+	return res;
 }
 //**********************************************************************
