@@ -14,12 +14,12 @@ Feather: Lightweight Multi-party Updatable Delegated Private Set Intersection
 * Second, install the libraries and unzip the Feather file. 
 * Third, run the following command lines in order:
 
-    cd Feather-master
+      cd Feather-master
     
-    g++ -c Rand.cpp -c Hashtable.cpp -c Polynomial.cpp -c Server.cpp -c Client.cpp
+      g++ -c Rand.cpp -c Hashtable.cpp -c Polynomial.cpp -c Server.cpp -c Client.cpp
     
-    g++  -I$home/homeDirectory/include -I/homeDirectory/bloom_filter/bloom_filter.hpp Rand.o Hashtable.o Polynomial.o Server.o Client.o test.cpp  -o test  -lntl -lgmpxx -lgmp -lcryptopp
+      g++  -I$home/homeDirectory/include -I/homeDirectory/bloom_filter/bloom_filter.hpp Rand.o Hashtable.o Polynomial.o Server.o Client.o test.cpp  -o test  -lntl -lgmpxx -lgmp -lcryptopp
     
-    ./test
+      ./test
     
     
