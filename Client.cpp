@@ -12,7 +12,7 @@
 // It sets a moduli for blinding bloom filters and sets the bloom filter parameters.
 Client::Client(Server*server, bigint *elements, int el_size){
 
-  key_size = AES::DEFAULT_KEYLENGTH;
+  	key_size = AES::DEFAULT_KEYLENGTH;
 	Random rd_;
 	labels_bit_size = 64;
 	int block_size = AES::BLOCKSIZE;
@@ -308,7 +308,7 @@ int* Client::find_matched_bins(bigint k_1, bigint k_2, int size){
 // - Function description: pseudorandomly permutes an array of integers, using Fisher-Yates shuffle algorithm.
 int* Client::PR_shuffle(int* elem, int size, bigint seed){
 
-  int *result;
+  	int *result;
 	result = new int [size];
 	int buffer;
 	bigint r, big_j;
@@ -344,7 +344,7 @@ int* Client::PR_shuffle(int* elem, int size, bigint seed){
 //**********************************************************************
 // - Function description: pseudorandomly permutes an array of big-integers, using Fisher-Yates shuffle algorithm.
 bigint*  Client::PR_shuffle(bigint* elem, int size, bigint seed){
-
+	
 	bigint *res,buf, r, big_j;
 	mpz_init(r);
 	mpz_init(buf);
@@ -547,7 +547,8 @@ bigint* Client::convert_BF_to_bigint(bloom_filter filter){
 // In the case where BF's very first bis are zero, when it is converted to a biginteger they would be lost.
 // So, the function ensures they are put back (using a pad), otherwise BF would not reconstructed correctly.
  bloom_filter Client::convert_bigint_to_BF(bigint a, bloom_parameters parameters){
-   // converts bigint to a bitstring and pad it if needed.
+	 
+	 // converts bigint to a bitstring and pad it if needed.
 	 bloom_filter filter(bf_parameters);
 	 filter.clear();
 	 int size = filter.bit_table_.size();
@@ -754,6 +755,7 @@ void Client::outsource_db(string& poly_ID){
 // - Function description: generates a request for PSI computation. This request is created by the result recipient client and
 // sent to the other client for its permission.
 CompPerm_Request * Client::gen_compPerm_req(byte (& tmp_key_)[AES::DEFAULT_KEYLENGTH], byte (& tmp_iv_)[AES::BLOCKSIZE]){
+	
 	AutoSeededRandomPool prng;
   	byte temp_key[AES::DEFAULT_KEYLENGTH];
   	byte temp_iv[AES::BLOCKSIZE];
@@ -780,6 +782,7 @@ CompPerm_Request * Client::gen_compPerm_req(byte (& tmp_key_)[AES::DEFAULT_KEYLE
 //**********************************************************************
 // - Function description: given a request for PSI computation, it grants (or does not grant) the computation.
 GrantComp_Info * Client::grant_comp(CompPerm_Request* com_req, bigint **&qq, bool accept){
+	
 	// if the client does not grant the computation, then it returns NULL.
   	Random rd_;
   	int byte_ = (pub_moduli_bitsize) / 8;
