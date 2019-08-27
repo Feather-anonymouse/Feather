@@ -10,6 +10,7 @@
 // - Description: Constructor - given the hash table parameters and an array of elements,
 // it constructs a hash table and inserts the elements into it.
 Hashtable::Hashtable(int NoElem_in_bucket, bigint* elem_, int elem_size, int table_size){
+	
 	int indx[elem_size];
 	NoElem_in_bucket_ = NoElem_in_bucket;
 	bigint *elem;
