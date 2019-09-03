@@ -163,16 +163,17 @@ int main(){
 		Random rd_1;
 		bigint *temp_9;
 		int size_;
-
-
-
-
-
-
-
-
-
-
+		
+		//-------Update----------
+		bigint *temp;
+		temp = (mpz_t*)malloc(1 * sizeof(mpz_t));
+		temp= gen_randSet (1, elem_bit_size,serv.get_pubModuli(), serv.get_xpoints(t1), xsize);
+		cout<<"\n inserting:"<<temp[0]<<endl;
+		cout<<"\n++++++++++++++++++++++"<<endl;
+		string ss = B.update(temp[0], "insertion", label, "B_ID");
+ 		string sss = B.update(temp[0], "deletion", label, "B_ID");
+ 		cout<<ss<<endl;
+ 		cout<<sss<<endl;
 		//-----------Set Intersection------------
 		bigint **q;
 		int* sz;
