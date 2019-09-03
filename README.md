@@ -1,5 +1,5 @@
 # Feather
-Feather: Lightweight Multi-party Updatable Delegated Private Set Intersection
+Feather: Lightweight Multi-party Updatable Cloud-based Private Set Intersection
 
 # Dependencies
 
