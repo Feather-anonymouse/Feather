@@ -713,7 +713,7 @@ void Client::outsource_db(string& poly_ID){
 	bigint minus_one, *blinded_BF, *bigint_BF;
 	mpz_init_set_str(minus_one, "-1", 10);
 	Hashtable HT(NoElem_in_bucket, elem, elem_size, table_size); // contructs a hash table and inserts the element into it.
-	if(poly_ID == "B_ID"){
+	if(poly_ID == "B_ID"){ // this is done only for test-- so it can be tested on devices with small memory-- it can be commented out.
     	bigint_BF = assing_BFs2HT(HT, NoElem_in_bucket, table_size, bf_parameters); // assigns a bloom filters to each bin. It returns an array of bigint representing bloom filters.
     	blinded_BF = blind_BFs_(bigint_BF, table_size , BF_key_, BF_iv, pr_moduli);
     	db.BF = PR_shuffle(blinded_BF, table_size, shuffle_key); // permutes the array of bigintegers and stores the result in Client_Dataset that will be sent to the server.
